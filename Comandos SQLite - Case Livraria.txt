@@ -1,0 +1,85 @@
+CREATE TABLE cliente
+(cpf INT NOT NULL PRIMARY KEY,
+ NomeCliente TEXT NOT NULL,
+ EmailCliente VARCHAR (120),
+ TelefoneCliente VARCHAR (11),
+ DataNascimento DATE,
+ MesCadastroCliente VARCHAR (3) NOT NULL);
+
+
+INSERT INTO cliente (cpf, NomeCliente, EmailCliente, TelefoneCliente, DataNascimento, MesCadastroCliente)
+VALUES (81909381004, 'Jennifer Banco SQL', "teste@gmail.com", 79123456789, '2000-08-26', 'Jan');
+INSERT INTO cliente (cpf, NomeCliente, EmailCliente, TelefoneCliente, DataNascimento, MesCadastroCliente)
+VALUES (18878386006, 'Cleber Banco SQL', "teste2@gmail.com", 79123456788, '2000-09-29', 'Jan');
+INSERT INTO cliente (cpf, NomeCliente, EmailCliente, TelefoneCliente, DataNascimento, MesCadastroCliente)
+VALUES (13291921097, 'Pedro Banco SQL', "teste3@gmail.com", 79123451089, '2000-08-26', 'Fev');
+INSERT INTO cliente (cpf, NomeCliente, EmailCliente, TelefoneCliente, DataNascimento, MesCadastroCliente)
+VALUES (48291688036, 'Carlos Banco SQL', "teste3@gmail.com", 79123451089, '2000-08-26', 'Ago');
+
+select*FROM cliente 
+//Para conferir se todos os dados estão no local
+
+
+CREATE TABLE livro
+(CodLivro INT NOT NULL PRIMARY KEY,
+ NomeLivro TEXT,
+ CategoriaLivro TEXT,
+ PrecoLivro INT,
+ QtdEstoque INT,
+ MesChegada VARCHAR (3)
+);
+
+INSERT INTO livro (CodLivro, NomeLivro, CategoriaLivro, PrecoLivro, QtdEstoque, MesChegada)
+VALUES (1, 'A Aventura de Pi', 'Aventura', 29.99, 25, 'Ago');
+INSERT INTO livro (CodLivro, NomeLivro, CategoriaLivro, PrecoLivro, QtdEstoque, MesChegada)
+VALUES (2, 'Edgar - Uma História Suspeita', 'Aventura', 29.99, 25, 'Ago');
+INSERT INTO livro (CodLivro, NomeLivro, CategoriaLivro, PrecoLivro, QtdEstoque, MesChegada)
+VALUES (3, 'No Limite do Amanhã', 'Aventura', 29.99, 25, 'Ago');
+INSERT INTO livro (CodLivro, NomeLivro, CategoriaLivro, PrecoLivro, QtdEstoque, MesChegada)
+VALUES (4, 'A Doma - Stephen King', 'Terror', 29.99, 25, 'Ago');
+INSERT INTO livro (CodLivro, NomeLivro, CategoriaLivro, PrecoLivro, QtdEstoque, MesChegada)
+VALUES (5, 'The Time Travelers Wife', 'Romance', 18.99, 6, 'Set');
+
+
+CREATE TABLE venda
+(CodPedido INT NOT NULL PRIMARY KEY,
+ NFE INT,
+ CodLivro INT,
+ nomelivro TEXT,
+ categorialivro TEXT,
+ ValorUnit INT,
+ Qtdvenda INT,
+ CpfComprador INT,
+ mesvenda VARCHAR (3)
+ );
+
+INSERT INTO venda (CodPedido, NFE , CodLivro, nomelivro, categorialivro, ValorUnit, QtdVenda, CpfComprador, mesvenda)
+VALUES (900001, 300001, 5, 'The Time Travelers Wife', 'Romance', 18.99, 3, 81909381004,'Set');
+INSERT INTO venda (CodPedido, NFE , CodLivro, nomelivro, categorialivro, ValorUnit, QtdVenda, CpfComprador, mesvenda)
+VALUES (900002, 300002, 4, 'A Doma - Stephen King', 'Terror', 29.99, 1, 81909381004,'Set');
+INSERT INTO venda (CodPedido, NFE , CodLivro, nomelivro, categorialivro, ValorUnit, QtdVenda, CpfComprador, mesvenda)
+VALUES (900003, 300003, 3, 'No Limite do Amanhã', 'Aventura', 29.99, 1, 18878386006,'Set');
+INSERT INTO venda (CodPedido, NFE , CodLivro, nomelivro, categorialivro, ValorUnit, QtdVenda, CpfComprador, mesvenda)
+VALUES (900004, 300004, 3, 'No Limite do Amanhã', 'Aventura', 29.99, 1, 13291921097,'Ago');
+INSERT INTO venda (CodPedido, NFE , CodLivro, nomelivro, categorialivro, ValorUnit, QtdVenda, CpfComprador, mesvenda)
+VALUES (900005, 300005, 1, 'A Aventura de Pi', 'Aventura', 29.99, 1, 48291688036,'Ago');
+INSERT INTO venda (CodPedido, NFE , CodLivro, nomelivro, categorialivro, ValorUnit, QtdVenda, CpfComprador, mesvenda)
+VALUES (900006, 300006, 2, 'Edgar - Uma História Suspeita', 'Aventura', 29.99, 1, 48291688036,'Set');
+
+
+
+SELECT * FROM livro; Para analisar quais livros ainda temos em estoque antes da venda.
+SELECT * FROM cliente, venda WHERE cliente.cpf=venda.CpfComprador ; //para buscar os dados de quem comprou os livros vendidos.
+
+
+
+//Perguntas que posso responder com consultas ao meu Banco de Dados.
+//1- Ver se ainda temos o produto em estoque antes de concluir a venda;
+//1- Quantos clientes tenho cadastrados em cada mês;
+//2- Quais Categorias são as mais vendidas e qual a Receita obtida por ela;
+//3- Quais Livros de Cada Categoria são vendidas por mês;
+
+
+//Logs a serem criados
+//Criação de Log para envio de e-mail ao cliente quando um livro Novo da mesma categoria que ele comprou Chegar à livraria;
+//Criação de Log para analisar o intervalo de meses entre a chegada de um livro ao estoque e a venda dele.
